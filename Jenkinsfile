@@ -13,7 +13,7 @@ pipeline{
          }
         stage("Github Checkout"){
             steps{
-               git branch: 'main' , credentialsId: 'github' , url: 'https://github.com/pc9733/register-app'
+               git branch: 'main' , credentialsId: 'git' , url: 'https://github.com/pc9733/register-app'
             }
          
         }
@@ -36,4 +36,5 @@ pipeline{
 	           }	
            }
        }
+}
 }
