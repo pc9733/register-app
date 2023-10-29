@@ -44,14 +44,14 @@ pipeline{
             }
 
         }
-        stage("aws test"){
-           steps {
-               script {
-                    sh "aws s3 ls"
-                }	
-            }
-
-        }
+            stage('Build Docker Image') {
+              steps{
+              script {
+                sh "docker build -t register-app:1.0 ."
+                sh "docker images"
+              }
+              }
+    }
         
 
        }
