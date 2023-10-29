@@ -44,6 +44,23 @@ pipeline{
             }
 
         }
+        stage("Quality Gate"){
+           steps {
+               script {
+                    waitForQualityGate abortPipeline: false, credentialsId: 'jenkins_sonar'
+                }	
+            }
+
+        }
+        stage("aws test"){
+           steps {
+               script {
+                    sh "aws s3 ls"
+                }	
+            }
+
+        }
+        
 
        }
 }
