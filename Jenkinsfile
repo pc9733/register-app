@@ -3,6 +3,7 @@ pipeline{
     tools{
         jdk 'jdk11'
         maven 'Maven3'
+        docker 'Docker-jenkins'
     }
     stages{
         stage("Cleanup Workspace"){
