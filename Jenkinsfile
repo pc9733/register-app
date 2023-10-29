@@ -46,6 +46,7 @@ pipeline{
             stage('Build Docker Image') {
               steps{
               script {
+                sh "whoami"
                 sh "docker build -t register-app:1.0 ."
                 sh "docker images"
               }
