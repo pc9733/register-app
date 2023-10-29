@@ -52,6 +52,20 @@ pipeline{
               }
               }
     }
+    stage('Push Docker Image to ECR') {
+    steps {
+        script {
+            // Authenticate Docker to ECR (this step is needed before pushing the image)
+            sh "aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 120695692422.dkr.ecr.us-east-1.amazonaws.com"
+
+            // Tag the Docker image with the ECR repository URL
+            sh "docker tag register-app:1.0 120695692422.dkr.ecr.us-east-1.amazonaws.com/register-app:1.0"
+
+            // Push the Docker image to ECR
+            sh "docker push 120695692422.dkr.ecr.us-east-1.amazonaws.com/register-app:1.0"
+        }
+    }
+}
         
 
        }
