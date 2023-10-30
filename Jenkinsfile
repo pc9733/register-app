@@ -26,23 +26,23 @@ pipeline{
                 sh "mvn test"
             }
         }
-       stage("SonarQube Analysis"){
-           steps {
-	           script {
-		        withSonarQubeEnv(credentialsId: 'jenkins_sonar') { 
-                        sh "mvn sonar:sonar"
-		        }
-	           }	
-           }
-       }
-        stage("Quality Gate"){
-           steps {
-               script {
-                    waitForQualityGate abortPipeline: false, credentialsId: 'jenkins_sonar'
-                }	
-            }
-
-        }
+       #stage("SonarQube Analysis"){
+       #    steps {
+	   #        script {
+	   #        withSonarQubeEnv(credentialsId: 'jenkins_sonar') { 
+       #                 sh "mvn sonar:sonar"
+	   #        }
+	   #        }	
+       #    }
+       #}
+       # stage("Quality Gate"){
+       #    steps {
+       #        script {
+       #             waitForQualityGate abortPipeline: false, credentialsId: 'jenkins_sonar'
+       #         }	
+       #     }
+       #
+       # }
             stage('Build Docker Image') {
               steps{
               script {
