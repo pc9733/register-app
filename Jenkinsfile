@@ -1,7 +1,6 @@
 pipeline{
     agent any
     tools{
-        jdk 'jdk11'
         maven 'Maven3'
     }
     stages{
@@ -27,23 +26,47 @@ pipeline{
                 sh "mvn test"
             }
         }
-       stage("SonarQube Analysis"){
-           steps {
-	           script {
-		        withSonarQubeEnv(credentialsId: 'sonarqube-id') { 
-                        sh "mvn sonar:sonar"
-		        }
-	           }	
-           }
-       }
-        stage("Quality Gate"){
-           steps {
-               script {
-                    waitForQualityGate abortPipeline: false, credentialsId: 'sonarqube-id'
-                }	
-            }
+       //stage("SonarQube Analysis"){
+       //    steps {
+	   //        script {
+	   //        withSonarQubeEnv(credentialsId: 'jenkins_sonar') { 
+       //                 sh "mvn sonar:sonar"
+	   //        }
+	   //        }	
+       //    }
+       //}
+       // stage("Quality Gate"){
+       //    steps {
+       //        script {
+       //             waitForQualityGate abortPipeline: false, credentialsId: 'jenkins_sonar'
+       //         }	
+       //     }
+       //
+       // }
+            stage('Build Docker Image') {
+              steps{
+              script {
+                sh "whoami"
+                sh "docker build -t register-app:1.0 ."
+                sh "docker images"
+              }
+              }
+    }
+    stage('Push Docker Image to ECR') {
+    steps {
+        script {
+            // Authenticate Docker to ECR (this step is needed before pushing the image)
+            sh "aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 120695692422.dkr.ecr.us-east-1.amazonaws.com"
 
+            // Tag the Docker image with the ECR repository URL
+            sh "docker tag register-app:1.0 120695692422.dkr.ecr.us-east-1.amazonaws.com/register-app:1.0"
+
+            // Push the Docker image to ECR
+            sh "docker push 120695692422.dkr.ecr.us-east-1.amazonaws.com/register-app:1.0"
         }
+    }
+}
+        
 
        }
 }
