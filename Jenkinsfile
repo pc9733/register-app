@@ -66,6 +66,23 @@ pipeline{
         }
     }
 }
+stage('Deploy to EKS') {
+    steps {
+        script {
+            sh "kubectl config use-context <EKS_cluster_context>"
+            sh "kubectl apply -f k8s-deployment.yml" 
+        }
+    }
+}
+
+stage('Check Deployment') {
+    steps {
+        script {
+            sh "kubectl get deployments"
+            sh "kubectl get services"
+        }
+    }
+}
         
 
        }
