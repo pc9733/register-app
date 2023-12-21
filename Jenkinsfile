@@ -79,6 +79,7 @@ stage('Deploy to EKS') {
 stage('Check Deployment') {
     steps {
         script {
+            sh "kubectl get all"
             // sh "kubectl get deployments"
             // sh "kubectl get services"
         }
