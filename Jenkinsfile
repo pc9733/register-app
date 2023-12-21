@@ -70,8 +70,8 @@ stage('Deploy to EKS') {
     steps {
         script {
             sh "kubect get all"
-            //sh "kubectl config use-context <EKS_cluster_context>"
-            //sh "kubectl apply -f deployment.yml" 
+            // sh "kubectl config use-context <EKS_cluster_context>"
+            // sh "kubectl apply -f deployment.yml" 
         }
     }
 }
