@@ -47,7 +47,7 @@ pipeline{
               steps{
               script {
                 sh "whoami"
-                sh "docker build -t register-app:1.0 ."
+                sh "docker build -t register-app:${BUILD_NUMBER} ."
                 sh "docker images"
               }
               }
@@ -62,7 +62,7 @@ pipeline{
             sh "docker tag register-app:1.0 120695692422.dkr.ecr.us-east-1.amazonaws.com/register-app:1.0"
 
             // Push the Docker image to ECR
-            sh "docker push 120695692422.dkr.ecr.us-east-1.amazonaws.com/register-app:1.0"
+            sh "docker push 120695692422.dkr.ecr.us-east-1.amazonaws.com/register-app:${BUILD_NUMBER}"
         }
     }
 }
