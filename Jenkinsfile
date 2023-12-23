@@ -2,6 +2,7 @@ pipeline{
     agent any
     tools{
         maven 'Maven3'
+        REGISTRY_CREDENTIALS = = 'ecr:us-east-1:cb310cd1-b866-4c24-b62b-c4580994252d'
     }
     stages{
         stage("Cleanup Workspace"){
@@ -56,7 +57,7 @@ pipeline{
     steps {
         script {
             // Authenticate Docker to ECR (this step is needed before pushing the image)
-            sh "aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 120695692422.dkr.ecr.us-east-1.amazonaws.com"
+            docker.withRegistry('120695692422.dkr.ecr.us-east-1.amazonaws.com', REGISTRY_CREDENTIALS)
 
             // Tag the Docker image with the ECR repository URL
             sh "docker tag register-app:${BUILD_NUMBER} 120695692422.dkr.ecr.us-east-1.amazonaws.com/register-app:${BUILD_NUMBER}"
