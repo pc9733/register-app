@@ -4,7 +4,7 @@ pipeline{
         maven 'Maven3'
     }
     environment {
-        REGISTRY_CREDENTIALS = 'aws-cred'
+        REGISTRY_CREDENTIALS = 'ecr:us-east-1:awscreds:aws-cred'
     }
     stages{
         stage("Cleanup Workspace"){
