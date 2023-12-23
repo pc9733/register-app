@@ -2,7 +2,7 @@ pipeline{
     agent any
     tools{
         maven 'Maven3'
-        REGISTRY_CREDENTIALS = = 'ecr:us-east-1:cb310cd1-b866-4c24-b62b-c4580994252d'
+        REGISTRY_CREDENTIALS = 'ecr:us-east-1:cb310cd1-b866-4c24-b62b-c4580994252d'
     }
     stages{
         stage("Cleanup Workspace"){
