@@ -61,13 +61,14 @@ pipeline{
             // Authenticate Docker to ECR (this step is needed before pushing the image)
             docker.withRegistry('120695692422.dkr.ecr.us-east-1.amazonaws.com', REGISTRY_CREDENTIALS){
                 // Docker operations like docker.build, docker.push go here
-            }
+            
 
             // Tag the Docker image with the ECR repository URL
             sh "docker tag register-app:${BUILD_NUMBER} 120695692422.dkr.ecr.us-east-1.amazonaws.com/register-app:${BUILD_NUMBER}"
 
             // Push the Docker image to ECR
             sh "docker push 120695692422.dkr.ecr.us-east-1.amazonaws.com/register-app:${BUILD_NUMBER}"
+            }
         }
     }
 }
