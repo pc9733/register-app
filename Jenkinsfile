@@ -2,6 +2,8 @@ pipeline{
     agent any
     tools{
         maven 'Maven3'
+    }
+    environment {
         REGISTRY_CREDENTIALS = 'cb310cd1-b866-4c24-b62b-c4580994252d'
     }
     stages{
