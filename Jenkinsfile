@@ -4,7 +4,7 @@ pipeline{
         maven 'Maven3'
     }
     environment {
-        REGISTRY_CREDENTIALS = 'ecr:us-east-1:awscreds:aws-cred'
+        REGISTRY_CREDENTIALS = 'ecr:us-east-1:aws-cred'
     }
     stages{
         stage("Cleanup Workspace"){
@@ -67,7 +67,7 @@ pipeline{
 
             // Push the Docker image to ECR
             sh "docker push 120695692422.dkr.ecr.us-east-1.amazonaws.com/register-app:${BUILD_NUMBER}"
-            }
+            
             }
         }
     }
