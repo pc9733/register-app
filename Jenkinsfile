@@ -75,11 +75,15 @@ pipeline{
 stage('Deploy to EKS') {
     steps {
         script {
+            script {
+            withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId:'aws-cred']]) {
             sh "kubectl get all"
             // sh "kubectl config use-context <EKS_cluster_context>"
             // sh "kubectl apply -f deployment.yml" 
         }
+            }
     }
+}
 }
 
 stage('Check Deployment') {
