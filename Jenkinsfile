@@ -75,7 +75,7 @@ pipeline{
 stage('Deploy to EKS') {
     steps {
         script {
-            sh "sudo kubectl get all"
+            sh "kubectl get all"
             // sh "kubectl config use-context <EKS_cluster_context>"
             // sh "kubectl apply -f deployment.yml" 
         }
@@ -85,7 +85,7 @@ stage('Deploy to EKS') {
 stage('Check Deployment') {
     steps {
         script {
-            sh "sudo kubectl get all"
+            sh "kubectl get all"
             // sh "sudo kubectl get deployments"
             // sh "sudo kubectl get services"
         }
