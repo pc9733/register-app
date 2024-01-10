@@ -7,6 +7,7 @@ pipeline{
         REGISTRY_CREDENTIALS = 'ecr:us-east-1:aws-cred'
     }
     stages{
+	    stage("Parallel stage"){
 	parallel{
 		stage("test_parallel1"){
 		      steps{
@@ -15,7 +16,7 @@ pipeline{
 		stage("test_parallel2"){
 		      steps{
 			      echo "test parallel"
-		      }}}
+		      }}}}
         stage("Cleanup Workspace"){
             steps{
                 cleanWs()
